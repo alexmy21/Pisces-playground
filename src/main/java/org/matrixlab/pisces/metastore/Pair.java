@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.rokittech.astra.bloomdb;
+package org.matrixlab.pisces.metastore;
 
 import com.google.common.hash.BloomFilter;
 
