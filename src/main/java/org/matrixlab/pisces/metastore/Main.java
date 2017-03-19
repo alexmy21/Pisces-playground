@@ -1,4 +1,5 @@
-/*
+/* Copyright Alex Mylnikov 2017.
+ *
  * This program is distributed under the Apache License, Version 2.0 (the
  * "License"); you may not use this file except in compliance
  * with the License.  You may obtain a copy of the License at
@@ -41,11 +42,6 @@ import java.util.concurrent.LinkedBlockingQueue;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-/**
- * @author <a href="mailto:xiejiyun@foxmail.com">Xie, Jiyun</a>
- * @version 1.0.0
- * @since 2013-5-10
- */
 public class Main {
 
     /**
