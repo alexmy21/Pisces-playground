@@ -25,6 +25,7 @@ package org.matrixlab.pisces.metastore;
 
 //import com.netflix.astyanax.Cluster;
 
+import org.matrixlab.pisces.metastore.api.MetaStore;
 import com.datastax.driver.core.Cluster;
 import com.datastax.driver.core.ResultSet;
 import com.datastax.driver.core.Row;

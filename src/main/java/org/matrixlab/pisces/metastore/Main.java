@@ -25,6 +25,7 @@ package org.matrixlab.pisces.metastore;
  *
  * @author alexmy
  */
+import org.matrixlab.pisces.metastore.core.Pair;
 import com.google.common.hash.HashCode;
 import com.google.common.hash.HashFunction;
 import com.google.common.hash.Hashing;
@@ -43,16 +44,22 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class Main {
+    
+    BlockingQueue<HashCode> queue;
+    HashFunction hf;
+    
+    public Main(){
+        this.hf = Hashing.murmur3_128(0);
+        this.queue = createQueue(1500000);        
+    }
 
     /**
      * @param args
      */
     public static void main(String[] args) {
-
-        // Common Hash 
-        HashFunction hf = Hashing.murmur3_128(0);
-
-        BlockingQueue<HashCode> queue = createQueue(hf, 1500000);
+        
+        Main main = new Main();
+        
         long start = System.currentTimeMillis();
         System.out.println("Queue creating time: " + (System.currentTimeMillis() - start));
         System.out.println("Queue is done!");
@@ -64,7 +71,7 @@ public class Main {
         ExecutorService executor = Executors.newFixedThreadPool(threads);
 
         start = System.currentTimeMillis();
-        processBloomFilter(threads, queue, bloomMap, executor);
+        main.processBloomFilter(threads, main.queue, bloomMap, executor);
 
         System.out.println("Queue processing time: " + (System.currentTimeMillis() - start));
 
@@ -73,19 +80,18 @@ public class Main {
 
     /**
      * 
-     * @param hf
      * @param size
      * @return 
      */
-    public static BlockingQueue<HashCode> createQueue(HashFunction hf, int size) {
+    public final BlockingQueue<HashCode> createQueue(int size) {
         
-        BlockingQueue<HashCode> queue = new LinkedBlockingQueue<>();
+        this.queue = new LinkedBlockingQueue<>();
         // create random object
         Random randomno = new Random();
         
         for (int i = 0; i < size; ++i) {
-            HashCode codeFriend = hf.hashLong(randomno.nextLong());
-            queue.add(codeFriend);
+            HashCode hashCode = hf.hashLong(randomno.nextLong());
+            queue.add(hashCode);
         }
         return queue;
     }
@@ -97,7 +103,7 @@ public class Main {
      * @param bloomMap
      * @param executor 
      */
-    public static void processBloomFilter(int threads, BlockingQueue<HashCode> queue, Map<Long, Pair> bloomMap, ExecutorService executor) {
+    public void processBloomFilter(int threads, BlockingQueue<HashCode> queue, Map<Long, Pair> bloomMap, ExecutorService executor) {
         
         List<Callable<String>> callableTasks = new ArrayList<>();
         // Build task pool
@@ -126,7 +132,7 @@ public class Main {
      * @param map
      * @return 
      */
-    public static String callableTask(BlockingQueue<HashCode> queue, Map<Long, Pair> map) {
+    public String callableTask(BlockingQueue<HashCode> queue, Map<Long, Pair> map) {
         while (!queue.isEmpty()) {
             BFilter bf = new BFilter(queue, map);
             bf.run();

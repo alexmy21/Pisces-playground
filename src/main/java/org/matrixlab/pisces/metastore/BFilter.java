@@ -22,6 +22,7 @@
  */
 package org.matrixlab.pisces.metastore;
 
+import org.matrixlab.pisces.metastore.core.Pair;
 import com.google.common.hash.BloomFilter;
 import com.google.common.hash.Funnels;
 import com.google.common.hash.HashCode;
