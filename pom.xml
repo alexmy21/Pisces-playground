@@ -30,35 +30,7 @@
             <artifactId>minio</artifactId>
             <version>3.0.3</version>
         </dependency>
-        
-        <!-- https://mvnrepository.com/artifact/com.netflix.astyanax/astyanax-thrift -->
-        <!--dependency>
-            <groupId>com.netflix.astyanax</groupId>
-            <artifactId>astyanax</artifactId>
-            <version>3.9.0</version>
-        </dependency-->
-
-        <!-- https://mvnrepository.com/artifact/com.netflix.astyanax/astyanax-cassandra -->
-        <!--dependency>
-            <groupId>com.netflix.astyanax</groupId>
-            <artifactId>astyanax-cassandra</artifactId>
-            <version>3.9.0</version>
-        </dependency-->
-
-        <!-- https://mvnrepository.com/artifact/com.netflix.astyanax/astyanax-core -->
-        <!--dependency>
-            <groupId>com.netflix.astyanax</groupId>
-            <artifactId>astyanax-core</artifactId>
-            <version>3.9.0</version>
-        </dependency-->
-        <!-- https://mvnrepository.com/artifact/com.netflix.astyanax/astyanax-thrift -->
-        <!--dependency>
-            <groupId>com.netflix.astyanax</groupId>
-            <artifactId>astyanax-thrift</artifactId>
-            <version>3.9.0</version>
-        </dependency-->
-
-
+       
         <!-- Datastax cassandra drivers-->
         <dependency>
             <groupId>com.datastax.cassandra</groupId>
